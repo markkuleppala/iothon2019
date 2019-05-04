@@ -33,4 +33,5 @@ options = {    "0" : FW,
 while True:
     dataFromClient, address = server_socket.recvfrom(256)
     dataFromClient = dataFromClient.rstrip()
-    options[dataFromClient]() # Is this needed
+    print(dataFromClient)
+#    options[dataFromClient]() # Is this needed
