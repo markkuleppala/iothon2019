@@ -2,8 +2,6 @@
 
 #!/usr/bin/env python
 import socket, time
-import RPi.GPIO as GPIO
-# GPIO Setting Up
 
 UID_accredited = [130,202,95,9,30] # Accredited user UID
 UID_accredited = " ".join(str(x) for x in UID_accredited)
@@ -75,6 +73,8 @@ def Tcp_Close():
    return
 
 def check_accreditation(UID_received):
+	print("---%s---" % (UID_received))
+	print("---%s---" % (UID_accredited))
 	if UID_received == UID_accredited:
 		return 1
 	else:

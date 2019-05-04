@@ -5,6 +5,8 @@ import socket, time
 IPADDRESS = "10.84.109.147"
 UID_accredited = [130,202,95,9,30]
 UID_accredited = " ".join(str(x) for x in UID_accredited)
+UID_accredited = str(UID_accredited)
+
 
 def Tcp_connect(HostIp, Port):
     global s
@@ -32,7 +34,7 @@ Tcp_connect(IPADDRESS, 6666)
 print("yksi")
 Tcp_Write(UID_accredited)
 print("kaksi")
-print Tcp_Read()
+#print("---%s---" % (Tcp_Read())
 print("kolme")
 Tcp_Write('hi')
 print Tcp_Read()
