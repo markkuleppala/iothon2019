@@ -51,7 +51,7 @@ while continue_reading:
         MIFAREReader.MFRC522_SelectTag(uid)
         
         #ENTER Your Card UID here
-        my_uid = [61,84,4,114,31]
+        my_uid = [130,202,95,9,30]
         
         #Configure LED Output Pin
         LED = 18
