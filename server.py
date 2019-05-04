@@ -1,7 +1,7 @@
 # Copied from https://www.raspberrypi.org/forums/viewtopic.php?t=205197 and https://gist.github.com/BenKnisley/5647884
 
 #!/usr/bin/env python
-import socket, time
+import socket, time, datetime
 
 f = open("log.txt", "a+")
 
@@ -34,7 +34,8 @@ def tcp_read():
 
 def check_accreditation(UID_received):
 	if UID_received == UID_accredited:
-		f.write("UID %s used electricity for 0.5 seconds\n" % UID_received)
+		st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+		f.write("%s: UID [%s] used electricity for 0.5 seconds\n" % (st, UID_received))
 		return 1
 	else:
 		return 0
