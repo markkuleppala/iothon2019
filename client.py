@@ -104,10 +104,10 @@ while continue_reading:
         #ENTER Your Card UID here
         #my_uid = [130,202,95,9,30]
 
-        uid = " ".join(str(x) for x in uid_read)
+        uid_check = " ".join(str(x) for x in uid)
         
         #Check to see if card UID read matches your card UID
-        if accreditation(uid):
+        if accreditation(uid_check):
         #if uid == my_uid:                #Open the Doggy Door if matching UIDs
             print("Access Granted")
             charging_active = True
