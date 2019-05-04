@@ -34,7 +34,7 @@ def tcp_read():
 
 def check_accreditation(UID_received):
 	if UID_received == UID_accredited:
-		f.write("UID %s used electricity for 0.5 seconds")
+		f.write("UID %s used electricity for 0.5 seconds\n" % UID_received)
 		return 1
 	else:
 		return 0
