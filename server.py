@@ -6,6 +6,7 @@ import RPi.GPIO as GPIO
 # GPIO Setting Up
 
 UID_accredited = [130,202,95,9,30] # Accredited user UID
+UID_accredited = " ".join(str(x) for x in UID_accredited)
 
 # # Create a Server Socket and wait for a client to connect
 # server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

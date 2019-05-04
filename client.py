@@ -4,6 +4,7 @@ import socket, time
 #client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 IPADDRESS = "10.84.109.147"
 UID_accredited = [130,202,95,9,30]
+UID_accredited = " ".join(str(x) for x in UID_accredited)
 
 def Tcp_connect(HostIp, Port):
     global s
