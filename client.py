@@ -42,10 +42,10 @@ def initiate_connection(IPADDRESS, PORT):
 	
 def accreditation(UID_accredited):
 	print(".")
-	Tcp_Write(UID_accredited)
+	tcp_write(UID_accredited)
 	print(". .")
 	print(". . .")
-	return Tcp_Read()
+	return tcp_read()
 
 def close_connection(): # Closing the pipe
 	tcp_write('-1')
