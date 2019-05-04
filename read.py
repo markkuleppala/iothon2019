@@ -1,4 +1,4 @@
-#Copied from: https://www.deviceplus.com/connect/integrate-rfid-module-raspberry-pi/
+# Copied from: https://www.deviceplus.com/connect/integrate-rfid-module-raspberry-pi/
 #!/usr/bin/env python
 # -*- coding: utf8 -*-
  
@@ -25,6 +25,8 @@ MIFAREReader = mfrc522.MFRC522()
 # Welcome message
 print ("Welcome to the MFRC522 data read example")
 print ("Press Ctrl-C to stop.")
+
+count = 0.0
  
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 while continue_reading:
@@ -63,12 +65,16 @@ while continue_reading:
         if uid == my_uid:                #Open the Doggy Door if matching UIDs
             print("Access Granted")
             GPIO.output(LED, GPIO.HIGH)  #Turn on LED
-            time.sleep(0.2)                #Wait 0.2 Seconds
+            time.sleep(0.1)
+            count += 0.1                #Wait 0.2 Seconds
             #GPIO.output(LED, GPIO.LOW)   #Turn off LED
         
-        else:
-            GPIO.output(LED, GPIO.LOW)                            #Don't open if UIDs don't match
+        else:                            #Don't open if UIDs don't match
             print("Access Denied, YOU SHALL NOT PASS!")
+    else:
+        GPIO.output(LED, GPIO.LOW)
+        if count > 0:
+            print("UID: %s,%s,%s,%s,%s charged for %f seconds",str(uid[0]),str(uid[1]),str(uid[2]),str(uid[3]),str(uid[4]),count)
         
 ##        # Authenticate
 ##        status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, 8, key, uid)
