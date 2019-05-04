@@ -34,7 +34,7 @@ def tcp_read():
 
 def check_accreditation(UID_received):
 	if UID_received == UID_accredited:
-		st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+		st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
 		f.write("%s: UID [%s] used electricity for 0.5 seconds\n" % (st, UID_received))
 		return 1
 	else:
