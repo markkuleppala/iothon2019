@@ -29,16 +29,19 @@ MIFAREReader = mfrc522.MFRC522()
 
 print ("Press Ctrl-C to stop.")
 
+# Connect to server
 def tcp_connect(IPADDRESS, PORT):
     global s
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     s.connect((IPADDRESS, PORT))
     return
-   
+
+# Write to server  
 def tcp_write(D):
    s.send(D + '\r')
    return 
-   
+
+# Read from server   
 def tcp_read():
 	a = ' '
 	b = ''
@@ -48,31 +51,34 @@ def tcp_read():
 		a = s.recv(1)
 	return b
 
+# Close connection to server
 def tcp_close():
    s.close()
    return 
 
-def initiate_connection(IPADDRESS, PORT): 
-	tcp_connect(IPADDRESS, PORT)
+
 	
 def accreditation(UID_accredited):
 	tcp_write(UID_accredited)
 	return tcp_read()
 
-def close_connection(): # Closing the pipe
+def close_connection(): # Closing the pipe and server
 	tcp_write('-1')
 	s.close()
 
-initiate_connection(IPADDRESS, PORT)
+# Initialize connection to server
+tcp_connect(IPADDRESS, PORT)
 
-
-count = 0.0
+# Interval for charging
 charge_interval = 3.0
-charging_active = False
 
+# Ignore pin warning
 GPIO.setwarnings(False)
-#Configure LED Output Pin
+
+#Configure buzzer output pin
 BUZZ = 7
+
+#  Set up the buzzer
 GPIO.setup(BUZZ, GPIO.OUT)
 GPIO.output(BUZZ, GPIO.LOW)
  
@@ -81,55 +87,35 @@ while continue_reading:
     
     # Scan for cards    
     (status,TagType) = MIFAREReader.MFRC522_Request(MIFAREReader.PICC_REQIDL)
- 
-    # If a card is found
-    #if status == MIFAREReader.MI_OK:
     
     # Get the UID of the card
     (status,uid) = MIFAREReader.MFRC522_Anticoll()
  
     # If we have the UID, continue
-
     if status == MIFAREReader.MI_OK:
  
         # Print UID
-        print ("Card read with UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])+','+str(uid[4]))  
-        # This is the default key for authentication
-        #key = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
+        print ("Card read with UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])+','+str(uid[4]))
         
         # Select the scanned tag
         MIFAREReader.MFRC522_SelectTag(uid)
-        
-        #ENTER Your Card UID here
-        #my_uid = [130,202,95,9,30]
 
+        # Format UID
         uid_check = " ".join(str(x) for x in uid)
         
         #Check to see if card UID read matches your card UID
         if accreditation(uid_check) == '1':
-        #if uid == my_uid:                #Open the Doggy Door if matching UIDs
             print("Access granted for %.1f seconds\n. . ." % charge_interval)
-            #charging_active = True
-            GPIO.output(BUZZ, GPIO.HIGH)  #Turn on LED
-            #charging_uid = uid
-            time.sleep(charge_interval/3)
+            GPIO.output(BUZZ, GPIO.HIGH)  # Turn on charging (buzzer)
+            time.sleep(charge_interval/3) # Time indicators
             print(". .")
             time.sleep(charge_interval/3)
             print(".")
             time.sleep(charge_interval/3)
-            #GPIO.output(LED, GPIO.LOW)   #Turn off LED
         
-        else:                            #Don't open if UIDs don't match
-            print("Access denied")
+        else: # UID not accredited by server
+            print("Access denied\n")
     else:
-    	GPIO.setwarnings(False)
-        GPIO.output(BUZZ, GPIO.LOW)
-        # if charging_active == True and count > 0:
-        #     print("UID: %s charged for %3.1f seconds" % (str(charging_uid),count))
-        #     count = 0
-        #     charging_active == False
+        GPIO.output(BUZZ, GPIO.LOW) # Turn off the charging (buzzer)
 
-
-
-#print(accreditation(UID_accredited))
-close_connection()
+close_connection() # Close connection gracefully
