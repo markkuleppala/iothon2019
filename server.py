@@ -76,9 +76,9 @@ def Tcp_Close():
 
 def check_accreditation(UID_received):
 	if UID_received == UID_accredited:
-		return True
+		return 1
 	else:
-		return False
+		return 0
 
 
 Tcp_server_wait(5, 6666)
