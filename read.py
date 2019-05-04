@@ -67,9 +67,12 @@ while continue_reading:
             print("Access Granted")
             charging_active = True
             GPIO.output(LED, GPIO.HIGH)  #Turn on LED
-            #time.sleep(0.5)
-            #count += 0.5                #Wait 0.2 Seconds
+            (status,uid) = MIFAREReader.MFRC522_Anticoll()
             charging_uid = uid
+            while uid == charging_uid:
+                #time.sleep(0.5)
+                #count += 0.5                #Wait 0.2 Seconds
+                print("test")
             #GPIO.output(LED, GPIO.LOW)   #Turn off LED
         
         else:                            #Don't open if UIDs don't match
