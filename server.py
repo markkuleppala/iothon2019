@@ -42,7 +42,7 @@ while True:
     dataFromClient = str(dataFromClient)
     print(dataFromClient)
     if dataFromClient in users:
-    	print("Client ", dataFromClient, " is authorized. Starting charging.")
+    	print("Client %s is authorized. Starting charging.", dataFromClient)
     	charging_status = True
 
 
