@@ -40,7 +40,7 @@ def tcp_close():
 def initiate_connection(IPADDRESS, PORT): 
 	tcp_connect(IPADDRESS, PORT)
 	
-def accreditation(UID_accredited)
+def accreditation(UID_accredited):
 	print(".")
 	Tcp_Write(UID_accredited)
 	print(". .")
