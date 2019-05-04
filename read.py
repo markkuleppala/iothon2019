@@ -41,7 +41,6 @@ while continue_reading:
  
     # If a card is found
     if status == MIFAREReader.MI_OK:
-        print(status)
         print ("Card detected")
     
     # Get the UID of the card
@@ -49,11 +48,12 @@ while continue_reading:
  
     # If we have the UID, continue
     if status == MIFAREReader.MI_OK:
+        print("status: %s MIFAREReader.MI_OK: %s", status, MIFAREReader.MI_OK)
  
         # Print UID
         print ("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])+','+str(uid[4]))  
         # This is the default key for authentication
-        key = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
+        #key = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
         
         # Select the scanned tag
         MIFAREReader.MFRC522_SelectTag(uid)
@@ -74,7 +74,7 @@ while continue_reading:
     else:
         GPIO.output(LED, GPIO.LOW)
         if count > 0:
-            print("UID: %s,%s,%s,%s,%s charged for %f seconds",str(uid[0]),str(uid[1]),str(uid[2]),str(uid[3]),str(uid[4]),count)
+            print("UID: %s charged for %f seconds",str(uid),count)
         
 ##        # Authenticate
 ##        status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, 8, key, uid)
