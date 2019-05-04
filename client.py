@@ -21,8 +21,8 @@ def Tcp_Write(D):
 def Tcp_Read():
 	a = ' '
 	b = ''
+	a = s.recv(1)
 	while a != '\r':
-		a = s.recv(1)
 		b = b + a
 	return b
 
