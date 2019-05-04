@@ -108,7 +108,7 @@ while continue_reading:
         #Check to see if card UID read matches your card UID
         if accreditation(uid_check) == '1':
         #if uid == my_uid:                #Open the Doggy Door if matching UIDs
-            print("Access Granted for %.1f seconds\n. . ." % charge_interval)
+            print("Access granted for %.1f seconds\n. . ." % charge_interval)
             #charging_active = True
             GPIO.output(BUZZ, GPIO.HIGH)  #Turn on LED
             #charging_uid = uid
@@ -120,7 +120,7 @@ while continue_reading:
             #GPIO.output(LED, GPIO.LOW)   #Turn off LED
         
         else:                            #Don't open if UIDs don't match
-            print("Access Denied")
+            print("Access denied")
     else:
     	GPIO.setwarnings(False)
         GPIO.output(BUZZ, GPIO.LOW)
