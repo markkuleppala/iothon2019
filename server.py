@@ -88,7 +88,7 @@ print("kaksi")
 message = Tcp_Read()
 print(check_accreditation(message))
 print("kolme")
-Tcp_Write(check_accreditation(message))
+Tcp_Write(str(check_accreditation(message)))
 print(message)
 while  message != -1:
 	print Tcp_Read()
