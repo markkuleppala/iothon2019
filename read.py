@@ -74,7 +74,8 @@ while continue_reading:
     else:
         GPIO.output(LED, GPIO.LOW)
         if count > 0:
-            print("UID: %s charged for %f seconds",str(uid),count)
+            print("UID: %s charged for %3.1f seconds" % (str(uid),count))
+    count = 0
         
 ##        # Authenticate
 ##        status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, 8, key, uid)
