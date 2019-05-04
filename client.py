@@ -104,7 +104,7 @@ while continue_reading:
         uid_check = " ".join(str(x) for x in uid)
         
         #Check to see if card UID read matches your card UID
-        if obj.decrypt(accreditation(uid_check)) == '1':
+        if accreditation(uid_check) == '1':
             print("Access granted for %.1f seconds\n. . ." % charge_interval)
             GPIO.output(BUZZ, GPIO.HIGH)  # Turn on charging (buzzer)
             time.sleep(charge_interval/3) # Time indicators
