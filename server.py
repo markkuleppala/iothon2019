@@ -69,7 +69,6 @@ def Tcp_Read():
 		a = s.recv(1)
 		b = b + a
 	#return b
-	Tcp_Write(check_accreditation)
 	return b
 
 def Tcp_Close():
@@ -88,6 +87,7 @@ print("yksi")
 Tcp_server_next()
 print("kaksi")
 message = Tcp_Read()
+print(check_accreditation(message))
 print("kolme")
 print(message)
 while  message != -1:
