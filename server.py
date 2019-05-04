@@ -3,64 +3,25 @@
 #!/usr/bin/env python
 import socket, time
 
+PORT = 6666
 UID_accredited = [130,202,95,9,30] # Accredited user UID
 UID_accredited = " ".join(str(x) for x in UID_accredited)
-
-# # Create a Server Socket and wait for a client to connect
-# server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-# server_socket.bind(('', 6666))
-# print ("UDPServer Waiting for client on port 6666")
-
-# # Define moving functions
-
-# def FW():
-#     GPIO.output(17,True)
-#     GPIO.output(27,True)
-#     print ("Forward")
-
-
-# def STOP():
-#     GPIO.output(17,False)
-#     GPIO.output(27,False)
-#     print ("Stop")
-
-# options = {    "1" : FW,
-#                "0" : STOP,
-# }
-
-# # Recive data from client and decide which function to call
-# charging_status = False # Charging not currently active
-# while True:
-#     dataFromClient, address = server_socket.recvfrom(256)
-#     dataFromClient = dataFromClient.rstrip()
-#     dataFromClient = str(dataFromClient)
-#     print(dataFromClient)
-#     if dataFromClient in users:
-#     	print("Client %s is authorized. Starting charging.", dataFromClient)
-#     	charging_status = True
-
-
-def Tcp_connect(HostIp, Port):
-    global s
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((HostIp, Port))
-    return
     
-def Tcp_server_wait(numofclientwait, port):
+def tcp_server_wait(numofclientwait, PORT):
 	global s2
 	s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
-	s2.bind(('',port)) 
+	s2.bind(('', PORT)) 
 	s2.listen(numofclientwait) 
 
-def Tcp_server_next():
+def tcp_server_next():
 		global s
 		s = s2.accept()[0]
    
-def Tcp_Write(D):
+def tcp_write(D):
    s.send(D + '\r')
    return 
    
-def Tcp_Read():
+def tcp_read():
 	a = ' '
 	b = ''
 	a = s.recv(1)
@@ -69,10 +30,6 @@ def Tcp_Read():
 		a = s.recv(1)
 	return b
 
-def Tcp_Close():
-   s.close()
-   return
-
 def check_accreditation(UID_received):
 	if UID_received == UID_accredited:
 		return 1
@@ -80,15 +37,15 @@ def check_accreditation(UID_received):
 		return 0
 
 message = 0 # Placeholder
-Tcp_server_wait(5, 6666)
+tcp_server_wait(5, PORT)
 print(".")
-Tcp_server_next()
+tcp_server_next()
 while  message != '-1':
 	print(". .")
-	message = Tcp_Read()
+	message = tcp_read()
 	print(check_accreditation(message))
 	print(". . .")
-	Tcp_Write(str(check_accreditation(message)))
+	tcp_write(str(check_accreditation(message)))
 	print(message)
 print("Closing the server")
-Tcp_Close()
+s.close()
