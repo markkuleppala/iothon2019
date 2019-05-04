@@ -71,11 +71,11 @@ while continue_reading:
         else:                            #Don't open if UIDs don't match
             print("Access Denied, YOU SHALL NOT PASS!")
     else:
-        GPIO.setup(LED, GPIO.OUT)
+        #GPIO.setup(LED, GPIO.OUT)
         GPIO.output(LED, GPIO.LOW)
         if count > 0:
             print("UID: %s charged for %3.1f seconds" % (str(uid),count))
-    count = 0
+    #count = 0
         
 ##        # Authenticate
 ##        status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, 8, key, uid)
