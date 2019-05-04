@@ -24,6 +24,7 @@ def Tcp_Read():
 	a = s.recv(1)
 	while a != '\r':
 		b = b + a
+		a = s.recv(1)
 	return b
 
 def Tcp_Close():
