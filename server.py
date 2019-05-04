@@ -11,7 +11,7 @@ PORT = 6666
 UID_accredited = [211,192,142,185,36] # Accredited user UID
 UID_accredited = " ".join(str(x) for x in UID_accredited) # Format UID to string
 charge_interval = 3.0 # Interval for charging
-obj = AES.new('cb79d792', AES.MODE_CBC, '3a77fb6a')
+obj = AES.new('1eaa813185567d2f', AES.MODE_CBC, '0762c97bb0225d8d')
 
 # Server waits for clients
 def tcp_server_wait(numofclientwait, PORT):

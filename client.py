@@ -7,7 +7,7 @@ import mfrc522
 import signal
 from Crypto.Cipher import AES
 
-obj = AES.new('cb79d792', AES.MODE_CBC, '3a77fb6a')
+obj = AES.new('1eaa813185567d2f', AES.MODE_CBC, '0762c97bb0225d8d')
 # >>> message = "The answer is no"
 # >>> ciphertext = obj.encrypt(message)
 # >>> ciphertext
@@ -18,7 +18,7 @@ obj = AES.new('cb79d792', AES.MODE_CBC, '3a77fb6a')
 
 
 IPADDRESS = "10.84.109.147" # Server IP address
-PORT = 6666 # Port used
+PORT = 6666 # Port used 
 UID_accredited = [130,202,95,9,30] # Accredited RFID keycard
 UID_accredited = " ".join(str(x) for x in UID_accredited) # Modify the format into string
 
