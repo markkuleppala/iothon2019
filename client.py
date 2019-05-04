@@ -47,7 +47,7 @@ def accreditation(UID_accredited):
 	print(". . .")
 	return Tcp_Read()
 
-def close_connection # Closing the pipe
+def close_connection(): # Closing the pipe
 	tcp_write('-1')
 	s.close()
 
