@@ -51,3 +51,6 @@ def close_connection(): # Closing the pipe
 	tcp_write('-1')
 	s.close()
 
+initiate_connection(IPADDRESS, PORT)
+accreditation(UID_accredited)
+close_connection()
