@@ -83,7 +83,7 @@ message = 0 # Placeholder
 Tcp_server_wait(5, 6666)
 print(".")
 Tcp_server_next()
-while  message != -1:
+while  message != '-1':
 	print(". .")
 	message = Tcp_Read()
 	print(check_accreditation(message))

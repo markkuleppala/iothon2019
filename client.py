@@ -38,6 +38,9 @@ print(". .")
 #print("---%s---" % (Tcp_Read())
 print(". . .")
 print Tcp_Read()
+
+# Closing the pipe
+Tcp_Write('-1')
 Tcp_Close()
 
 # try:
