@@ -16,7 +16,8 @@ continue_reading = True
 # Capture SIGINT for cleanup when the script is aborted
 def end_read(signal,frame):
     global continue_reading
-    print ("Ctrl+C captured, ending read.")
+    print ("\nCtrl+C captured, ending read.")
+    tcp_write("-1")
     continue_reading = False
     GPIO.cleanup()
 
