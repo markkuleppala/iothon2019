@@ -52,5 +52,5 @@ def close_connection(): # Closing the pipe
 	s.close()
 
 initiate_connection(IPADDRESS, PORT)
-accreditation(UID_accredited)
+print(accreditation(UID_accredited))
 close_connection()
