@@ -54,7 +54,7 @@ while continue_reading:
         my_uid = [130,202,95,9,30]
         
         #Configure LED Output Pin
-        LED = 2
+        LED = 7
         GPIO.setup(LED, GPIO.OUT)
         GPIO.output(LED, GPIO.LOW)
         
