@@ -7,7 +7,7 @@ import socket, time, datetime
 f = open("log.txt", "a+") # Initalize log file
 
 PORT = 6666
-UID_accredited = [130,202,95,9,30] # Accredited user UID
+UID_accredited = [211,192,142,185,36] # Accredited user UID
 UID_accredited = " ".join(str(x) for x in UID_accredited) # Format UID to string
 charge_interval = 3.0 # Interval for charging
 

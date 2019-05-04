@@ -56,17 +56,17 @@ def tcp_close():
    s.close()
    return 
 
-
-	
+# Check accreditation of keycard inserted	
 def accreditation(UID_accredited):
 	tcp_write(UID_accredited)
 	return tcp_read()
 
-def close_connection(): # Closing the pipe and server
+# Closing the pipe and server
+def close_connection(): 
 	tcp_write('-1')
 	s.close()
 
-# Initialize connection to server
+# Initiate connection to server
 tcp_connect(IPADDRESS, PORT)
 
 # Interval for charging
