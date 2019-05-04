@@ -59,7 +59,7 @@ def Tcp_server_next():
 		s = s2.accept()[0]
    
 def Tcp_Write(D):
-   s.send(D) + '\r')
+   s.send(D + '\r')
    return 
    
 def Tcp_Read():
