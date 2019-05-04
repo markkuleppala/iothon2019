@@ -47,7 +47,7 @@ def Tcp_connect(HostIp, Port):
     s.connect((HostIp, Port))
     return
     
-def Tcp_server_wait (numofclientwait, port):
+def Tcp_server_wait(numofclientwait, port):
 	global s2
 	s2 = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 
 	s2.bind(('',port)) 
@@ -58,7 +58,7 @@ def Tcp_server_next():
 		s = s2.accept()[0]
    
 def Tcp_Write(D):
-   s.send(D + '\r')
+   s.send(D)# + '\r')
    return 
    
 def Tcp_Read():
@@ -67,16 +67,26 @@ def Tcp_Read():
 	while a != '\r':
 		a = s.recv(1)
 		b = b + a
+	#return b
+	Tcp_Write(check_accreditation)
 	return b
 
 def Tcp_Close():
    s.close()
-   return 
+   return
 
-Tcp_server_wait (5, 6666)
+def check_accreditation(UID_received):
+	if UID_received == UID_accredited:
+		return True
+	else:
+		return False
+
+
+Tcp_server_wait(5, 6666)
 Tcp_server_next()
-print Tcp_Read()
-Tcp_Write('hi')
-print Tcp_Read()
-Tcp_Write('hi')
+message = Tcp_Read()
+print(message)
+while  message != -1:
+	print Tcp_Read()
+print("Closing the server")
 Tcp_Close()

@@ -3,6 +3,7 @@
 import socket, time
 #client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 IPADDRESS = "10.84.109.147"
+UID_accredited = [130,202,95,9,30]
 
 def Tcp_connect(HostIp, Port):
     global s
@@ -27,7 +28,7 @@ def Tcp_Close():
    return 
    
 Tcp_connect(IPADDRESS, 6666)
-Tcp_Write('hi')
+Tcp_Write(UID_accredited)
 print Tcp_Read()
 Tcp_Write('hi')
 print Tcp_Read()
