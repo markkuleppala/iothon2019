@@ -1,19 +1,48 @@
-# Copied from https://www.raspberrypi.org/forums/viewtopic.php?t=205197
+# Copied from https://www.raspberrypi.org/forums/viewtopic.php?t=205197 and https://gist.github.com/BenKnisley/5647884
 
-import socket
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+import socket, time
+#client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 IPADDRESS = "10.84.109.147"
 
-try:
-     while 1:
-          data = raw_input("Enter Data :")
+def Tcp_connect(HostIp, Port):
+    global s
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    s.connect((HostIp, Port))
+    return
+   
+def Tcp_Write(D):
+   s.send(D + '\r')
+   return 
+   
+def Tcp_Read():
+	a = ' '
+	b = ''
+	while a != '\r':
+		a = s.recv(1)
+		b = b + a
+	return b
+
+def Tcp_Close():
+   s.close()
+   return 
+   
+Tcp_connect(IPADDRESS, 6666)
+Tcp_Write('hi')
+print Tcp_Read()
+Tcp_Write('hi')
+print Tcp_Read()
+Tcp_Close()
+
+# try:
+#      while 1:
+#           data = raw_input("Enter Data :")
 
 # 6666 = Number Port
-          client_socket.sendto(data, (IPADDRESS,6666))
-          print ("Sending request")
+#           client_socket.sendto(data, (IPADDRESS,6666))
+#           print ("Sending request")
 
-except Exception as ex:
-    print ex
-    raw_input()
+# except Exception as ex:
+#     print ex
+#     raw_input()
 
-client_socket.close()
+# client_socket.close()

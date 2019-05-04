@@ -42,7 +42,7 @@ while continue_reading:
  
     # If a card is found
     if status == MIFAREReader.MI_OK:
-        print ("Card detected")
+        #print ("Card detected")
     
     # Get the UID of the card
     (status,uid) = MIFAREReader.MFRC522_Anticoll()
@@ -68,19 +68,14 @@ while continue_reading:
             charging_active = True
             GPIO.output(LED, GPIO.HIGH)  #Turn on LED
             charging_uid = uid
-            while uid == charging_uid:
-                (status,uid) = MIFAREReader.MFRC522_Anticoll()
-                #time.sleep(0.5)
-                #count += 0.5                #Wait 0.2 Seconds
-                print("test")
+            sleep(0.5)
             #GPIO.output(LED, GPIO.LOW)   #Turn off LED
         
         else:                            #Don't open if UIDs don't match
             print("Access Denied, YOU SHALL NOT PASS!")
-        uid = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
     else:
         GPIO.output(LED, GPIO.LOW)
-        if charging_active == True and count > 0:
-            print("UID: %s charged for %3.1f seconds" % (str(charging_uid),count))
-            count = 0
-            charging_active == False
+        # if charging_active == True and count > 0:
+        #     print("UID: %s charged for %3.1f seconds" % (str(charging_uid),count))
+        #     count = 0
+        #     charging_active == False
