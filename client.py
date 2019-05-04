@@ -1,24 +1,30 @@
-# Copied from https://www.raspberrypi.org/forums/viewtopic.php?t=205197 and https://gist.github.com/BenKnisley/5647884
+# Copied from https://www.raspberrypi.org/forums/viewtopic.php?t=205197, https://www.deviceplus.com/connect/integrate-rfid-module-raspberry-pi/ and https://gist.github.com/BenKnisley/5647884
 
+#!/usr/bin/env python
 import socket, time
-#client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-IPADDRESS = "10.84.109.147"
-UID_accredited = [130,202,95,9,30]
-UID_accredited = " ".join(str(x) for x in UID_accredited)
-UID_accredited = str(UID_accredited)
+import RPi.GPIO as GPIO
+import mfrc522
+import signal
 
+IPADDRESS = "10.84.109.147" # Server IP address
+PORT = 6666 # Port used
+UID_accredited = [130,202,95,9,30] # Accredited RFID keycard
+UID_accredited = " ".join(str(x) for x in UID_accredited) # Modify the format into string
+#UID_accredited = str(UID_accredited)
 
-def Tcp_connect(HostIp, Port):
+continue_reading = True
+
+def tcp_connect(IPADDRESS, PORT):
     global s
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((HostIp, Port))
+    s.connect((IPADDRESS, PORT))
     return
    
-def Tcp_Write(D):
+def tcp_write(D):
    s.send(D + '\r')
    return 
    
-def Tcp_Read():
+def tcp_read():
 	a = ' '
 	b = ''
 	a = s.recv(1)
@@ -27,32 +33,21 @@ def Tcp_Read():
 		a = s.recv(1)
 	return b
 
-def Tcp_Close():
+def tcp_close():
    s.close()
    return 
-   
-Tcp_connect(IPADDRESS, 6666)
-print(".")
-Tcp_Write(UID_accredited)
-print(". .")
-#print("---%s---" % (Tcp_Read())
-print(". . .")
-print Tcp_Read()
 
-# Closing the pipe
-Tcp_Write('-1')
-Tcp_Close()
+def initiate_connection(IPADDRESS, PORT): 
+	tcp_connect(IPADDRESS, PORT)
+	
+def accreditation(UID_accredited)
+	print(".")
+	Tcp_Write(UID_accredited)
+	print(". .")
+	print(". . .")
+	return Tcp_Read()
 
-# try:
-#      while 1:
-#           data = raw_input("Enter Data :")
+def close_connection # Closing the pipe
+	tcp_write('-1')
+	s.close()
 
-# 6666 = Number Port
-#           client_socket.sendto(data, (IPADDRESS,6666))
-#           print ("Sending request")
-
-# except Exception as ex:
-#     print ex
-#     raw_input()
-
-# client_socket.close()
