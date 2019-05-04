@@ -63,9 +63,10 @@ while continue_reading:
             print("Access Granted")
             GPIO.output(LED, GPIO.HIGH)  #Turn on LED
             time.sleep(0.2)                #Wait 0.2 Seconds
-            GPIO.output(LED, GPIO.LOW)   #Turn off LED
+            #GPIO.output(LED, GPIO.LOW)   #Turn off LED
             
-        else:                            #Don't open if UIDs don't match
+        else:
+            GPIO.output(LED, GPIO.LOW)                            #Don't open if UIDs don't match
             print("Access Denied, YOU SHALL NOT PASS!")
         
 ##        # Authenticate
