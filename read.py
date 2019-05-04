@@ -27,6 +27,11 @@ print ("Welcome to the MFRC522 data read example")
 print ("Press Ctrl-C to stop.")
 
 count = 0.0
+
+#Configure LED Output Pin
+LED = 7
+GPIO.setup(LED, GPIO.OUT)
+GPIO.output(LED, GPIO.LOW)
  
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 while continue_reading:
@@ -55,11 +60,6 @@ while continue_reading:
         
         #ENTER Your Card UID here
         my_uid = [130,202,95,9,30]
-        
-        #Configure LED Output Pin
-        LED = 7
-        GPIO.setup(LED, GPIO.OUT)
-        GPIO.output(LED, GPIO.LOW)
         
         #Check to see if card UID read matches your card UID
         if uid == my_uid:                #Open the Doggy Door if matching UIDs
