@@ -1,4 +1,4 @@
-# Copied from https://www.raspberrypi.org/forums/viewtopic.php?t=205197, https://www.deviceplus.com/connect/integrate-rfid-module-raspberry-pi/ and https://gist.github.com/BenKnisley/5647884
+# Base for the project copied from https://www.raspberrypi.org/forums/viewtopic.php?t=205197, https://www.deviceplus.com/connect/integrate-rfid-module-raspberry-pi/ and https://gist.github.com/BenKnisley/5647884
 
 #!/usr/bin/env python
 import socket, time
