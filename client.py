@@ -70,6 +70,7 @@ initiate_connection(IPADDRESS, PORT)
 
 
 count = 0.0
+charge_interval = 1.0
 charging_active = False
 
 GPIO.setwarnings(False)
@@ -110,11 +111,11 @@ while continue_reading:
         #Check to see if card UID read matches your card UID
         if accreditation(uid_check) == '1':
         #if uid == my_uid:                #Open the Doggy Door if matching UIDs
-            print("Access Granted")
+            print("Access Granted for %.1f seconds" % charge_interval)
             charging_active = True
             GPIO.output(BUZZ, GPIO.HIGH)  #Turn on LED
             charging_uid = uid
-            time.sleep(0.5)
+            time.sleep(charge_interval)
             #GPIO.output(LED, GPIO.LOW)   #Turn off LED
         
         else:                            #Don't open if UIDs don't match
