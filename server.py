@@ -2,6 +2,7 @@
 
 #!/usr/bin/env python
 import socket, time, datetime
+from Crypto.Cipher import AES
 
 
 f = open("log.txt", "a+") # Initalize log file
@@ -10,6 +11,7 @@ PORT = 6666
 UID_accredited = [211,192,142,185,36] # Accredited user UID
 UID_accredited = " ".join(str(x) for x in UID_accredited) # Format UID to string
 charge_interval = 3.0 # Interval for charging
+obj = AES.new('cb79d792', AES.MODE_CBC, '3a77fb6a')
 
 # Server waits for clients
 def tcp_server_wait(numofclientwait, PORT):
@@ -39,7 +41,8 @@ def tcp_read():
 	return b
 
 # Compare read UID to accredited UID
-def check_accreditation(UID_received):
+def check_accreditation(UID_received_cipher):
+	UID_received = obj.decrypt(UID_received_cipher)
 	if UID_received == UID_accredited:
 		st = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S') # Create timestamp
 		f.write("%s : UID [%s] used electricity for %.1f seconds\n" % (st, UID_received, charge_interval)) # Write usage to log
@@ -53,9 +56,10 @@ print(".")
 tcp_server_next()
 while  message != '-1': # Loop until termination char -1
 	print(". .")
-	message = tcp_read() # Read message from client
+	message = obj.decrypt(tcp_read()) # Read message from client
 	print(". . .")
-	tcp_write(str(check_accreditation(message))) # Write result to client
+	print(message)
+	tcp_write(obj.encrypt(str(check_accreditation(message)))) # Write result to client
 	print(message)
 print("Closing the server") # Shutting down the server
 s.close()
