@@ -66,7 +66,7 @@ def Tcp_Read():
 	while a != '\r':
 		a = s.recv(1)
 		b = b + a
-	return b
+	return b[:-1]
 
 def Tcp_Close():
    s.close()
