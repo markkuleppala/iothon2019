@@ -67,26 +67,17 @@ while continue_reading:
             print("Access Granted")
             charging_active = True
             GPIO.output(LED, GPIO.HIGH)  #Turn on LED
-            time.sleep(0.1)
-            count += 0.1                #Wait 0.2 Seconds
+            #time.sleep(0.5)
+            #count += 0.5                #Wait 0.2 Seconds
             charging_uid = uid
             #GPIO.output(LED, GPIO.LOW)   #Turn off LED
         
         else:                            #Don't open if UIDs don't match
             print("Access Denied, YOU SHALL NOT PASS!")
+        uid = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
     else:
         GPIO.output(LED, GPIO.LOW)
-        if charging_active == True:
+        if charging_active == True and count > 0:
             print("UID: %s charged for %3.1f seconds" % (str(charging_uid),count))
             count = 0
             charging_active == False
-        
-##        # Authenticate
-##        status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, 8, key, uid)
-##
-##        # Check if authenticated
-##        if status == MIFAREReader.MI_OK:
-##            MIFAREReader.MFRC522_Read(8)
-##            MIFAREReader.MFRC522_StopCrypto1()
-##        else:
-##            print "Authentication error"
