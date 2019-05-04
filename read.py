@@ -27,6 +27,7 @@ print ("Welcome to the MFRC522 data read example")
 print ("Press Ctrl-C to stop.")
 
 count = 0.0
+charging_active = False
 
 #Configure LED Output Pin
 LED = 7
@@ -47,6 +48,7 @@ while continue_reading:
     (status,uid) = MIFAREReader.MFRC522_Anticoll()
  
     # If we have the UID, continue
+
     if status == MIFAREReader.MI_OK:
  
         # Print UID
@@ -63,19 +65,21 @@ while continue_reading:
         #Check to see if card UID read matches your card UID
         if uid == my_uid:                #Open the Doggy Door if matching UIDs
             print("Access Granted")
+            charging_active = True
             GPIO.output(LED, GPIO.HIGH)  #Turn on LED
             time.sleep(0.1)
             count += 0.1                #Wait 0.2 Seconds
+            charging_uid = uid
             #GPIO.output(LED, GPIO.LOW)   #Turn off LED
         
         else:                            #Don't open if UIDs don't match
             print("Access Denied, YOU SHALL NOT PASS!")
     else:
-        #GPIO.setup(LED, GPIO.OUT)
         GPIO.output(LED, GPIO.LOW)
-        if count > 0:
-            print("UID: %s charged for %3.1f seconds" % (str(uid),count))
-    #count = 0
+        if charging_active == True:
+            print("UID: %s charged for %3.1f seconds" % (str(charging_uid),count))
+            count = 0
+            charging_active == False
         
 ##        # Authenticate
 ##        status = MIFAREReader.MFRC522_Auth(MIFAREReader.PICC_AUTHENT1A, 8, key, uid)
