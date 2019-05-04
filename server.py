@@ -10,7 +10,7 @@ GPIO.setup(27, GPIO.OUT)
 GPIO.output(17,False)
 GPIO.output(27,False)
 
-users = [] # List of accredited users
+users = ['1'] # List of accredited users
 
 # Create a Server Socket and wait for a client to connect
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -39,10 +39,11 @@ charging_status = False # Charging not currently active
 while True:
     dataFromClient, address = server_socket.recvfrom(256)
     dataFromClient = dataFromClient.rstrip()
+    dataFromClient = str(dataFromClient)
     print(dataFromClient)
     if dataFromClient in users:
     	print("Client ", dataFromClient, " is authorized. Starting charging.")
     	charging_status = True
-    
+
 
 #    options[dataFromClient]() # Is this needed
