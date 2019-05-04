@@ -56,10 +56,7 @@ def initiate_connection(IPADDRESS, PORT):
 	tcp_connect(IPADDRESS, PORT)
 	
 def accreditation(UID_accredited):
-	print(".")
 	tcp_write(UID_accredited)
-	print(". .")
-	print(". . .")
 	return tcp_read()
 
 def close_connection(): # Closing the pipe
@@ -125,6 +122,7 @@ while continue_reading:
         else:                            #Don't open if UIDs don't match
             print("Access Denied")
     else:
+    	GPIO.setwarnings(False)
         GPIO.output(BUZZ, GPIO.LOW)
         # if charging_active == True and count > 0:
         #     print("UID: %s charged for %3.1f seconds" % (str(charging_uid),count))
