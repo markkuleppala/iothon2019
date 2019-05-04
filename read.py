@@ -34,6 +34,7 @@ while continue_reading:
  
     # If a card is found
     if status == MIFAREReader.MI_OK:
+        print(status)
         print ("Card detected")
     
     # Get the UID of the card
@@ -64,7 +65,7 @@ while continue_reading:
             GPIO.output(LED, GPIO.HIGH)  #Turn on LED
             time.sleep(0.2)                #Wait 0.2 Seconds
             #GPIO.output(LED, GPIO.LOW)   #Turn off LED
-            
+        
         else:
             GPIO.output(LED, GPIO.LOW)                            #Don't open if UIDs don't match
             print("Access Denied, YOU SHALL NOT PASS!")
