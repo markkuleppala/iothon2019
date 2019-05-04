@@ -3,6 +3,8 @@
 #!/usr/bin/env python
 import socket, time
 
+f = open("log.txt", "a+")
+
 PORT = 6666
 UID_accredited = [130,202,95,9,30] # Accredited user UID
 UID_accredited = " ".join(str(x) for x in UID_accredited)
@@ -32,6 +34,7 @@ def tcp_read():
 
 def check_accreditation(UID_received):
 	if UID_received == UID_accredited:
+		f.write("UID %s used electricity for 0.5 seconds")
 		return 1
 	else:
 		return 0
@@ -49,3 +52,5 @@ while  message != '-1':
 	print(message)
 print("Closing the server")
 s.close()
+f.write("-----")
+f.close()

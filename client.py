@@ -71,10 +71,11 @@ initiate_connection(IPADDRESS, PORT)
 count = 0.0
 charging_active = False
 
+GPIO.setwarnings(False)
 #Configure LED Output Pin
-LED = 7
-GPIO.setup(LED, GPIO.OUT)
-GPIO.output(LED, GPIO.LOW)
+BUZZ = 7
+GPIO.setup(BUZZ, GPIO.OUT)
+GPIO.output(BUZZ, GPIO.LOW)
  
 # This loop keeps checking for chips. If one is near it will get the UID and authenticate
 while continue_reading:
@@ -84,7 +85,6 @@ while continue_reading:
  
     # If a card is found
     if status == MIFAREReader.MI_OK:
-        print ("Card detected")
     
     # Get the UID of the card
     (status,uid) = MIFAREReader.MFRC522_Anticoll()
@@ -94,7 +94,7 @@ while continue_reading:
     if status == MIFAREReader.MI_OK:
  
         # Print UID
-        print ("Card read UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])+','+str(uid[4]))  
+        print ("Card read with UID: "+str(uid[0])+","+str(uid[1])+","+str(uid[2])+","+str(uid[3])+','+str(uid[4]))  
         # This is the default key for authentication
         #key = [0xFF,0xFF,0xFF,0xFF,0xFF,0xFF]
         
@@ -111,15 +111,15 @@ while continue_reading:
         #if uid == my_uid:                #Open the Doggy Door if matching UIDs
             print("Access Granted")
             charging_active = True
-            GPIO.output(LED, GPIO.HIGH)  #Turn on LED
+            GPIO.output(BUZZ, GPIO.HIGH)  #Turn on LED
             charging_uid = uid
             time.sleep(0.5)
             #GPIO.output(LED, GPIO.LOW)   #Turn off LED
         
         else:                            #Don't open if UIDs don't match
-            print("Access Denied, YOU SHALL NOT PASS!")
+            print("Access Denied")
     else:
-        GPIO.output(LED, GPIO.LOW)
+        GPIO.output(BUZZ, GPIO.LOW)
         # if charging_active == True and count > 0:
         #     print("UID: %s charged for %3.1f seconds" % (str(charging_uid),count))
         #     count = 0
