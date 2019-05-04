@@ -5,17 +5,6 @@ import socket, time
 import RPi.GPIO as GPIO
 import mfrc522
 import signal
-from Crypto.Cipher import AES
-
-obj = AES.new('1eaa813185567d2f', AES.MODE_CBC, '0762c97bb0225d8d')
-# >>> message = "The answer is no"
-# >>> ciphertext = obj.encrypt(message)
-# >>> ciphertext
-# '\xd6\x83\x8dd!VT\x92\xaa`A\x05\xe0\x9b\x8b\xf1'
-# >>> obj2 = AES.new('This is a key123', AES.MODE_CBC, 'This is an IV456')
-# >>> obj2.decrypt(ciphertext)
-# 'The answer is no'
-
 
 IPADDRESS = "10.84.109.147" # Server IP address
 PORT = 6666 # Port used 
@@ -113,10 +102,9 @@ while continue_reading:
 
         # Format UID
         uid_check = " ".join(str(x) for x in uid)
-        uid_check_cipher = obj.encrypt(uid_check)
         
         #Check to see if card UID read matches your card UID
-        if obj.decrypt(accreditation(uid_check_cipher)) == '1':
+        if obj.decrypt(accreditation(uid_check)) == '1':
             print("Access granted for %.1f seconds\n. . ." % charge_interval)
             GPIO.output(BUZZ, GPIO.HIGH)  # Turn on charging (buzzer)
             time.sleep(charge_interval/3) # Time indicators
