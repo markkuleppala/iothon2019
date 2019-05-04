@@ -59,7 +59,7 @@ def Tcp_server_next():
 		s = s2.accept()[0]
    
 def Tcp_Write(D):
-   s.send(D)# + '\r')
+   s.send(D) + '\r')
    return 
    
 def Tcp_Read():
@@ -68,7 +68,6 @@ def Tcp_Read():
 	while a != '\r':
 		a = s.recv(1)
 		b = b + a
-	#return b
 	return b
 
 def Tcp_Close():
@@ -86,9 +85,10 @@ Tcp_server_wait(5, 6666)
 print("yksi")
 Tcp_server_next()
 print("kaksi")
-print Tcp_Read()
+message = Tcp_Read()
 print(check_accreditation(message))
 print("kolme")
+Tcp_Write(check_accreditation(message))
 print(message)
 while  message != -1:
 	print Tcp_Read()
