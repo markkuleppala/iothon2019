@@ -84,8 +84,11 @@ def check_accreditation(UID_received):
 
 
 Tcp_server_wait(5, 6666)
+print("yksi")
 Tcp_server_next()
+print("kaksi")
 message = Tcp_Read()
+print("kolme")
 print(message)
 while  message != -1:
 	print Tcp_Read()
