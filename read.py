@@ -54,7 +54,7 @@ while continue_reading:
         my_uid = [130,202,95,9,30]
         
         #Configure LED Output Pin
-        LED = 18
+        LED = 2
         GPIO.setup(LED, GPIO.OUT)
         GPIO.output(LED, GPIO.LOW)
         
@@ -62,7 +62,7 @@ while continue_reading:
         if uid == my_uid:                #Open the Doggy Door if matching UIDs
             print("Access Granted")
             GPIO.output(LED, GPIO.HIGH)  #Turn on LED
-            time.sleep(5)                #Wait 5 Seconds
+            time.sleep(0.2)                #Wait 0.2 Seconds
             GPIO.output(LED, GPIO.LOW)   #Turn off LED
             
         else:                            #Don't open if UIDs don't match
