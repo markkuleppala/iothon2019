@@ -53,5 +53,5 @@ while  message != '-1':
 	print(message)
 print("Closing the server")
 s.close()
-f.write("-----\n")
+f.write("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n")
 f.close()

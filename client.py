@@ -67,7 +67,7 @@ initiate_connection(IPADDRESS, PORT)
 
 
 count = 0.0
-charge_interval = 1.0
+charge_interval = 3.0
 charging_active = False
 
 GPIO.setwarnings(False)
