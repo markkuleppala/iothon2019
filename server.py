@@ -67,31 +67,28 @@ def Tcp_Read():
 	while a != '\r':
 		b = b + a
 		a = s.recv(1)
-	return b#[:-1] # Stripping the last character
+	return b
 
 def Tcp_Close():
    s.close()
    return
 
 def check_accreditation(UID_received):
-	print("---%s---" % (UID_received))
-	print("---%s---" % (UID_accredited))
 	if UID_received == UID_accredited:
 		return 1
 	else:
 		return 0
 
-
+message = 0 # Placeholder
 Tcp_server_wait(5, 6666)
-print("yksi")
+print(".")
 Tcp_server_next()
-print("kaksi")
-message = Tcp_Read()
-print(check_accreditation(message))
-print("kolme")
-Tcp_Write(str(check_accreditation(message)))
-print(message)
 while  message != -1:
-	print Tcp_Read()
+	print(". .")
+	message = Tcp_Read()
+	print(check_accreditation(message))
+	print(". . .")
+	Tcp_Write(str(check_accreditation(message)))
+	print(message)
 print("Closing the server")
 Tcp_Close()

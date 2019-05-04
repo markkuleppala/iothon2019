@@ -32,12 +32,11 @@ def Tcp_Close():
    return 
    
 Tcp_connect(IPADDRESS, 6666)
-print("yksi")
+print(".")
 Tcp_Write(UID_accredited)
-print("kaksi")
+print(". .")
 #print("---%s---" % (Tcp_Read())
-print("kolme")
-Tcp_Write('hi')
+print(". . .")
 print Tcp_Read()
 Tcp_Close()
 
